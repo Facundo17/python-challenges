@@ -1,2 +1,1 @@
-# ignorar todo lo que hay en node_modules
-nodejs/node_modules
+.venv
