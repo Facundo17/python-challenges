@@ -19,8 +19,10 @@ pip install flask requests
 import requests
 from flask import Flask, render_template, request
 
+app = Flask(__name__)
+
 # Replace with your OpenWeather API key
-API_KEY = "37cd8e491fee1a570e67cbb4777c5526"
+API_KEY = "YOUR API KEY"
 
 def get_weather(city):
     """Fetch weather data for a given city."""
@@ -32,20 +34,28 @@ def get_weather(city):
     else:
         return None
 
-#if __name__ == "__main__":
-#    
-#    city = input("Enter a city name: ")
-#    weather_data = get_weather(city)
-#    
-#    if weather_data:
-#        print(f"Weather in {city}:")
-#        print(f"Temperature: {weather_data['main']['temp']}°C")
-#        print(f"Weather: {weather_data['weather'][0]['description']}")
-#    else:
-#        print("Failed to retrieve temperature.")
-
-app = Flask(__name__)
-
 @app.route("/", methods=["GET", "POST"])
-def hello_world():
-    return "<p>Hello, World!</p>"
+def index():
+    weather_info = None
+    if request.method == "POST":
+        city = request.form["city"]
+
+        response = get_weather(city)
+
+        if response:
+            data = response
+            weather_info = {
+                "city": data["name"],
+                "temp": data["main"]["temp"],
+                "humidity": data["main"]["humidity"],
+                "wind_speed": data["wind"]["speed"],
+                "description": data["weather"][0]["description"].capitalize(),
+                "icon": data["weather"][0]["icon"]
+            }
+        else:
+            weather_info = {"error": "Ciudad no encontrada. Intenta de nuevo."}
+
+    return render_template("index.html", weather_info=weather_info)
+
+if __name__ == "__main__":
+    app.run(debug=True, host=5002)

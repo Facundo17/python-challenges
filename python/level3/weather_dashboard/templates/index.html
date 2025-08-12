@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Weather Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Weather Dashboard</h1>
+      <form method="POST">
+        <input type="text" name="city" placeholder="Enter city name" required />
+        <button type="submit">Get Weather</button>
+      </form>
+      {% if weather_info %} {% if weather_info.error %}
+      <div class="result error">{{ weather_info.error }}</div>
+      {% else %}
+      <div class="result">
+        <h2>{{ weather_info.city }}</h2>
+        <img
+          src="http://openweathermap.org/img/wn/{{ weather_info.icon }}@2x.png"
+          alt="Weather Icon"
+        />
+        <p>Temperature: {{ weather_info.temp }}°C</p>
+        <p>Humidity: {{ weather_info.humidity }}%</p>
+        <p>Weather: {{ weather_info.description }}</p>
+        <p>Wind Speed: {{ weather_info.wind_speed }}m/s</p>
+      </div>
+      {% endif %} {% endif %}
+    </div>
+  </body>
+</html>
