@@ -1,11 +1,49 @@
+"""
+This app uses the Pomodoro technique to help you stay productive by timing work sessions and breaks.
+
+Each Pomodoro session is 25 minutes of focused work, followed by a 5-minute break. 
+The user can start, pause, and reset sessions. 
+After every four Pomodoros, a longer break of 15 minutes is added.
+
+Use Tkinter to create a simple UI with buttons for starting, pausing, and resetting the timer.
+The timer displays the remaining time in MM:SS format.
+"""
 import tkinter as tk # para cear UI
 from tkinter.constants import *
-import time # para manejar el tiempo
 
 pause = False
 original_value = 1500
 current_number = 1500
 reset = False
+nSessions = 0
+
+class MyModalDialog(tk.Toplevel):
+    def __init__(self, master, nSessions):
+        super().__init__(master)
+        self.title("Take a break!")
+        self.geometry("300x150")
+        self.transient(master)  # Set the main window as the parent
+        self.grab_set()         # Make it modal
+        self.sessions = nSessions
+        
+        if self.sessions == 4:
+            message = "Take a 15-minute break!"
+        else:
+            message = "Take a 5-minute break!"
+
+        tk.Label(self, text=message).pack(pady=20)
+        tk.Button(self, text="OK", command=self.destroy).pack()
+
+        # Center the modal window relative to its parent (optional)
+        self.update_idletasks()
+        x = master.winfo_x() + (master.winfo_width() // 2) - (self.winfo_width() // 2)
+        y = master.winfo_y() + (master.winfo_height() // 2) - (self.winfo_height() // 2)
+        self.geometry(f"+{x}+{y}")
+
+        self.wait_window()  # Wait for this window to be destroyed
+
+def open_modal(nSessions):
+    modal = MyModalDialog(root, nSessions)
 
 def start():
     global pause, reset
@@ -21,10 +59,12 @@ def pause_button():
     pause = True
 
 def reset_button():
-    global current_number, reset, original_value
+    global current_number, reset, original_value, nSessions
     
     current_number = original_value
     reset = True
+    nSessions = 0
+    btn_start.config(state=NORMAL)
     
     number_label.config(text=convert_to_min_seconds(current_number))
 
@@ -33,7 +73,7 @@ def convert_to_min_seconds(min):
     return f"{mins:02d}:{secs:02d}"
 
 def countdown(time_left):
-    global pause, reset, current_number
+    global pause, reset, current_number, nSessions
     
     if reset:
         return
@@ -48,7 +88,14 @@ def countdown(time_left):
         number_label.config(text=timer_text)
         root.after(1000, countdown, time_left - 1)  # Call the function again after 1 second
     else:
-        number_label.config(text="Time's up!")
+        #number_label.config(text="Time's up!")
+        nSessions += 1
+       
+        open_modal(nSessions)  # Open the modal dialog when the timer ends
+        
+        if nSessions >= 4:
+            nSessions = 0
+        reset_button() 
 
 # crear la ventana principal
 root = tk.Tk()
