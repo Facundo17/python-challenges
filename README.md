@@ -58,7 +58,7 @@ git clone https://github.com/your-username/python-challenges.git
 
 2. Choose your level and navigate into the folder:
 ```bash
-cd python-challenges/level1
+cd python-challenges/python/level1
 ```
 
 ### NOTE: I suggest first creating a virtual environment inside your local project.
