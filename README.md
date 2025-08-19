@@ -77,7 +77,6 @@ Improve existing ones
 Fix typos or improve descriptions
 
 Feel free to open an issue, create new branches or submit a pull request.
-Esto es una prueba
 
 🙋‍♂️ Author
 
