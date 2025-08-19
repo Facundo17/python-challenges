@@ -1,3 +1,7 @@
+"""
+Create a simple ATM simulation program that allows users to check their balance, deposit money, and withdraw money.
+The program should continue to run until the user chooses to exit.
+"""
 
 print("Welcome to the ATM!")
 

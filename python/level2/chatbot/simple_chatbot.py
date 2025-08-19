@@ -1,4 +1,8 @@
-
+"""
+Create a simple chatbot that responds to user input based on predefined keywords.
+The chatbot should be able to respond to greetings, questions about the weather, time, day, and programming languages.
+The chatbot should continue to chat until the user types "bye".
+"""
 import datetime
 
 print("Hello! I'm here to chat. Type 'bye' to exit")

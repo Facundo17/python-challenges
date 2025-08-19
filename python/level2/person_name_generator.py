@@ -1,8 +1,14 @@
+"""
+Create file that generates random names from a predefined list in a text file.
+This module allows users to read names from a file, add new names, and select a random name.
+Exit the program when the user chooses the exit option.
+"""
+
 import random
-# TODO: mejorar la entrada de usuario, no se está validando o manjando excepciones
+# TODO: mejorar la entrada de usuario, no se está validando o manejando excepciones
 
 # usando el name.txt
-file = '../names.txt'
+file = './names.txt'
 
 def read_file() -> list:
     names = []
