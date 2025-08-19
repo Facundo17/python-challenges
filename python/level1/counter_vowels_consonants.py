@@ -1,4 +1,7 @@
-# cuantas vocales y cuantas consonantes tiene una palabra que ingresas
+"""
+Create a script that counts the number of vowels and consonants in a given string.
+"""
+
 vowels = ("a","e","i","o","u")
 consonants = ("b","c","d","f","g","h","j","k","l","m","n","ñ","p","q","r","s","t","v","x","z","w","y")
 countVowels = 0

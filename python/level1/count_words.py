@@ -1,4 +1,7 @@
-# ingresar una oración, devolver la longitud, y la palabra más larga en la oración
+"""
+Create a script that counts the number of words in a given sentence and finds the longest word.
+"""
+
 word = input("Enter a sentence: ")
 
 words = word.split(" ")

@@ -1,3 +1,7 @@
+"""
+Create a script that randomly selects a name from a list of names stored in a file called "names.txt".    
+"""
+
 import random
 
 with open("names.txt", "r") as names:

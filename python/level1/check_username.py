@@ -1,3 +1,10 @@
+"""
+Create a script that checks the validity of a username based on specific criteria:
+1. The username must be between 5 and 15 characters long.
+2. It must contain only alphanumeric characters.
+3. The first character must be a letter.
+"""
+
 valid = "Valid username"
 
 def check_username_validity(username):
